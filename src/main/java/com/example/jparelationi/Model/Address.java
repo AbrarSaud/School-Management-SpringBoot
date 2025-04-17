@@ -1,6 +1,7 @@
 package com.example.jparelationi.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -37,6 +38,6 @@ public class Address {
 
     @OneToOne
     @MapsId
-    @JoinColumn
+    @JsonIgnore
     private Teacher teacher;
 }
