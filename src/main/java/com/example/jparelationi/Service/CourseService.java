@@ -70,10 +70,10 @@ public class CourseService {
 
     // Create endpoint that take course id and return the teacher name for that class
     public String getTeacherNamesInCourse(Integer id) {
-        Integer courseById = courseRepository.getCourseById(id);
-        if (courseById == null) {
+            Course course = courseRepository.findCourseById(id);
+        if (course == null) {
             throw new ApiException("course Not Found!!");
         }
-        return teacherRepository.getTeacherNameById(courseById);
+        return course.getTeacher().getName();
     }
 }
