@@ -1,8 +1,9 @@
 package com.example.jparelationi.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,21 +16,23 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Course {
-
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+
     @NotEmpty
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id",referencedColumnName = "id")
-    @JsonIgnore
-    private Teacher teacher;
+    @NotNull(message = "The Age must be NOT Null")
+    @Positive
+    private Integer age;
 
-    @ManyToMany
-    @JsonIgnore
-    private Set<Student> students;
+    @NotEmpty
+    private String major;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "students")
+    private Set<Course> courses;
 }
+
